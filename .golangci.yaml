@@ -9,6 +9,11 @@ linters-settings:
 linters:
   enable-all: true
   disable:
+    - interfacer
+    - nosnakecase
+    - tparallel
+    - nonamedreturns
+    - exhaustruct
     - stylecheck
     - gosec
     - dupl
@@ -25,6 +30,40 @@ linters:
     - wsl
     - whitespace
     - gocognit
-    # TODO(@cpu): Uncomment goconst/golint once findings resolved.
+    - testpackage
+    - goerr113
+    - gomnd
+    - gofumpt
+    - exhaustive
     - goconst
     - golint
+    - godot
+    - forbidigo
+    - nlreturn
+    - ireturn
+    - paralleltest
+    - varnamelen
+    - wrapcheck
+    - ifshort
+    - gci
+    - exhaustivestruct
+    - cyclop
+    - errorlint
+    - revive
+    - errname
+    - forcetypeassert
+    - tagliatelle
+    - nilnil
+    - mnd
+
+issues:
+  exclude-rules:
+    # The existing ETSI lints have some gnarly logic that needs
+    # simplification/cleanup. For now we skip some linters for this dir.
+    - path: lints/etsi/
+      linters:
+        - nestif
+        - gosimple
+    - path: util/qc_stmt.go
+      linters:
+        - nestif

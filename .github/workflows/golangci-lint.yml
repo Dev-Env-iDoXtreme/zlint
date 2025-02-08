@@ -1,0 +1,26 @@
+name: golangci-lint
+on:
+  push:
+  pull_request:
+  schedule:
+    # Run every 12 hours, at the 15 minute mark. E.g.
+    # 2020-11-29 00:15:00 UTC, 2020-11-29 12:15:00 UTC, 2020-11-30 00:15:00 UTC
+    - cron:  '15 */12 * * *'
+jobs:
+  golangci:
+    name: Lint Sourcecode
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Install golangci-lint
+        run: |
+          VERSION=1.62.0
+          wget https://github.com/golangci/golangci-lint/releases/download/v${VERSION}/golangci-lint-${VERSION}-linux-amd64.tar.gz
+          tar zxvf golangci-lint-${VERSION}-linux-amd64.tar.gz
+          mv golangci-lint-${VERSION}-linux-amd64/golangci-lint . 
+      - name: Run golangci-lint
+        run: |
+          cd v3
+          ../golangci-lint run
